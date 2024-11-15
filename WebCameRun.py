@@ -4,12 +4,14 @@ from torchvision import transforms
 from PIL import Image
 from torchvision.models import efficientnet_v2_l
 
-model = efficientnet_v2_l(weights=None).to('cuda')
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+model = efficientnet_v2_l(weights=None).to(device)
 model.classifier = torch.nn.Sequential(
     torch.nn.Dropout(p=0.2, inplace=True),
     torch.nn.Linear(in_features=1280,
                     out_features=2,  # same number of output units as our number of classes
-                    bias=True)).to('cuda')
+                    bias=True)).to(device)
 # Load local weights
 try:
     state_dict = torch.load('model.pth')
@@ -53,7 +55,7 @@ while True:
         input_tensor = preprocess(img_pil).unsqueeze(0)  # Add batch dimension
 
         with torch.no_grad():
-            output = model(input_tensor.to('cuda'))
+            output = model(input_tensor.to(device))
             _, predicted = torch.max(output, 1)  # Get the index of the highest score
 
         class_names = ['non_smile', 'smile']
