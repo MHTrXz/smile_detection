@@ -1,6 +1,6 @@
 # Smile Detection Project
 
-This project implements a real-time smile detection system using a fine-tuned `EfficientNet V2-L model`. The workflow includes fine-tuning `EfficientNet V2-L` in `detection_model.ipynb`, where the trained weights are saved as `model.pth`, and using these weights in `smile_detection.py` for live webcam detection.
+This project implements a real-time smile detection system using a fine-tuned `EfficientNet V2-L` model. The workflow includes fine-tuning `EfficientNet V2-L` in `detection_model.ipynb`, where the trained weights are saved as `model.pth`, and using these weights in `smile_detection.py` for live webcam detection.
 
 
 ## Features
